@@ -7,18 +7,18 @@ const log = labeledLogger('exercise 2');
 let x = '';
 
 
-x += _;
+x += 'ja';
 
 const exercise2_cb_1 = () => {
-  x += _;
+  x += 'sc';
   log('cb 1:', x);
 };
 setTimeout(exercise2_cb_1, 100);
 
-x += _;
+x += 'v';
 
 const exercise2_cb_2 = () => {
-  x += _;
+  x += 'pt';
   log('cb 2:', x);
 };
 setTimeout(exercise2_cb_2, 300);
@@ -31,11 +31,11 @@ const exercise2_cb_3 = () => {
 setTimeout(exercise2_cb_3, 500);
 
 const exercise2_cb_4 = () => {
-  x += _;
+  x += 'ri';
   log('cb 4:', x);
 };
 setTimeout(exercise2_cb_4, 200);
 
-x += _;
+x += 'a';
 
 log(x);

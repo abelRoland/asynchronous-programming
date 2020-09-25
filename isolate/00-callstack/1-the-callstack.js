@@ -1,6 +1,6 @@
 'use strict';
 
-/* the callstack happens when you call a function from inside a function call
+/* the call stack happens when you call a function from inside a function call
   this is much easier to visualize than to describe, so ... JS Tutor!
 */
 let depth = 0;

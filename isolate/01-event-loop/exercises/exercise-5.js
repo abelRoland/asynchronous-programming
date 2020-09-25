@@ -6,6 +6,11 @@ const log = labeledLogger('exercise 5');
 //  read items from the unsorted array to the sorted array
 //  you can control the order of the sorted array by using different delays in a setTimeout
 const sortArray = (unsorted, sorted) => {
+  const sorting = unsorted.sort((a, b) =>
+    a.charCodeAt() - b.charCodeAt()
+  )
+  sorted.push(...sorting)
+  return sorted
 };
 
 

@@ -15,5 +15,4 @@ closure1("first call to closure1");
 const closure2 = closeIt("2");
 closure2("first call to closure2");
 closure2("second call to closure2");
-
 closure1("second call to closure1");

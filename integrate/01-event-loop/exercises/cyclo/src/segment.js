@@ -16,21 +16,17 @@ export class Segment {
   constructor(x, y) {
     this.msDelay = this.delayFactor + (x * 5);
     this.innerText = '  \n' + y + '\n\n  ';
-    // 2 lines are missing
-
-
+    this.coordinates.x = x;
+    this.coordinates.y = y;
   }
 
   handleClick(view) {
     if (this.isChanging) {
-      // 1 line is missing
-
+      clearTimeout(this.timeoutId);
     } else {
-      // 1 line is missing
-
+      this.timeoutId = setTimeout(this.timeoutCallback.bind(this, view), this.msDelay);
     };
-    // 1 line is missing
-
+    this.isChanging = !this.isChanging;
 
     logger.push({
       coordinates: `${this.coordinates.x}, ${this.coordinates.y}`,
@@ -41,12 +37,16 @@ export class Segment {
 
   timeoutCallback(view) {
     if (this.isChanging) {
-      // reverse isDisplayed
+      this.isDisplayed = !this.isDisplayed;
 
-      // update the view's innerText
+      if (!this.isDisplayed) {
+        view.innerText = this.emptyText
 
-      // set a timeout and capture the id
+      }else{
+        view.innerText = this.coordinates.y;
+      }
 
+      this.timeoutId = setTimeout(this.timeoutCallback.bind(this, view), this.msDelay);
     };
   }
 
@@ -57,12 +57,12 @@ export class Segment {
       + 'display: flex;'
       + 'align-items: center;'
       + 'justify-content: center;';
-    // set the container's innerText
-
-    // attach the clickHandler to the container
-
-    // start a timeout and capture the id
-
+      container.innerHTML = this.coordinates.y;
+      container.onclick = this.handleClick.bind(this, container);
+      this.timeoutId = setTimeout(
+        this.timeoutCallback.bind(this, container),
+        this.msDelay);
+        
     return container;
   }
 
