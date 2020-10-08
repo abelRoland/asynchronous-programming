@@ -1,21 +1,17 @@
 'use strict';
 
-
 // what data in which .json file sums to 0?
-
 
 const log = labeledLogger('6. Pass Test');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = _;
+const path = '/isolate/04-fetch/fake-api/json-types.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 
-
-
-
 const sumNumbers = (data) => {
+  return data['numbers'].reduce((acc, next) => acc + next) 
   // write me!
 };
 
@@ -37,14 +33,12 @@ const parseResponse = (response) => {
   return parsedResponse;
 };
 
-
-
-
 // something is missing ....
-
-
-
-
+fetch(requestURL)
+  .then(parseResponse)
+  .then(sumNumbers)
+  .then(testSum)
+  .catch(handleRejection);
 
 log('end of synchronous tasks');
 

@@ -4,10 +4,9 @@ const log = labeledLogger('1. Write URL');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = _;
+const path = '/isolate/04-fetch/fake-api/json-types.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
-
 
 
 const parseResponse = (response) => {
@@ -38,16 +37,11 @@ const handleRejection = (err) => {
 };
 
 
-
 fetch(requestURL)
-  .then(_)
-  .then(_)
-  .then(_)
-  .catch(_);
-
-
-
-
+  .then(parseResponse)
+  .then(separateStrings)
+  .then(testStrings)
+  .catch(handleRejection);
 
 log('end of synchronous tasks');
 

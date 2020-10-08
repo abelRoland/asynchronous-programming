@@ -5,11 +5,9 @@ const log = labeledLogger('2. Write URL');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = _;
+const path = '/isolate/04-fetch/fake-api/food/dry/nuts.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
-
-
 
 const parseResponse = (response) => {
   const parsedResponse = response.json();
@@ -37,14 +35,10 @@ const handleRejection = (err) => {
 
 // careful, these might not be right
 fetch(requestURL)
-  .then(parseResponse())
-  .then(separateBrazilNut())
-  .then(testNut())
-  .catch(handleRejection());
-
-
-
-
+  .then(parseResponse)
+  .then(separateBrazilNut)
+  .then(testNut)
+  .catch(handleRejection);
 
 log('end of synchronous tasks');
 

@@ -5,7 +5,7 @@ const log = labeledLogger('4. Pass Test');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = _;
+const path = '/isolate/04-fetch/fake-api/food/wet/mush.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 
@@ -19,7 +19,10 @@ const parseResponse = (response) => {
 };
 
 const filterMushes = (mushes) => {
-  // write me!
+  log('all mushes:', mushes);
+  //let keys = Object.keys(mushes)
+  //let mush = keys.filter(keys => mushes[keys] === true)
+  return Object.keys(mushes).filter(keys => mushes[keys] === true);
 };
 
 const testFilteredMushes = (trueMush) => {
@@ -37,8 +40,8 @@ const handleRejection = (err) => {
 // careful, this might not be right
 fetch(requestURL)
   .then(parseResponse)
-  .then(testFilteredMushes)
   .then(filterMushes)
+  .then(testFilteredMushes)
   .catch(handleRejection);
 
 
@@ -46,5 +49,3 @@ fetch(requestURL)
 
 
 log('end of synchronous tasks');
-
-
