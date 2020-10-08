@@ -39,13 +39,9 @@ const handleRejection = (err) => {
 
 // careful, this might not be right
 fetch(requestURL)
-  .then(parseResponse)
-  .then(filterMushes)
-  .then(testFilteredMushes)
-  .catch(handleRejection);
-
-
-
-
+  .then(res => parseResponse(res))
+  .then(filteredData => testFilteredMushes(filteredData))
+  .then(data => filterMushes(data))
+  .catch(err => handleRejection(err));
 
 log('end of synchronous tasks');
