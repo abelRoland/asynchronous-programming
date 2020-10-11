@@ -16,9 +16,8 @@ const parseResponse = (response) => {
 
 const processData = (data) => {
   log('data: ', data);
-  // write the rest ...
-
-};
+  return data.filter(item => item.body.includes('magnam'));
+  };
 
 const testData = (actual) => {
   log('actual: ', actual);

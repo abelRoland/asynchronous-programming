@@ -6,14 +6,36 @@ const expect = chai.expect;
 // write this function to replace the first two .thens of the three fetches below
 
 const wetFoodSearch = async (type = '', value) => {
+  const url = `${window.location.origin}/isolate/fake-api/food/wet/${type}.json`;
 
+	const response = await fetch(url);
+
+	if (!response.ok || response.status !== 200) {
+		throw new Error('response was not ok');
+	}
+
+	const parseDate = await response.json();
+
+	const check = (check) => {
+		const select = {};
+		for (const element in check) {
+			if (check[element] === value) {
+				select[element] = value;
+			}
+		}
+		return select;
+	};
+
+	const checked = check(parseDate);
+
+	return checked;
 };
 
 
 // these API calls work, but are very repetitive
 // your goal is to refactor the first to .thens of each fetch
 //  refactor them into the empty async function above
-
+/*
 fetch(window.location.origin + '/isolate/fake-api/food/wet/soups.json')
   .then(response => {
     if (!response.ok || response.status !== 200) {
@@ -29,18 +51,19 @@ fetch(window.location.origin + '/isolate/fake-api/food/wet/soups.json')
       }
     }
     return trueSoups;
-  })
-  .then((trueSoups) => {
-    log('trueSoups: ', trueSoups);
-    it('should be the soups with value true', () => {
-      expect(trueSoups).to.deep.equal({
-        "pea": true,
-        "lentil": true
+  }) */
+  wetFoodSearch('soups', true)
+    .then((trueSoups) => {
+      log('trueSoups: ', trueSoups);
+      it('should be the soups with value true', () => {
+        expect(trueSoups).to.deep.equal({
+          "pea": true,
+          "lentil": true
+        });
       });
-    });
-    console.log('');
-  })
-  .catch(err => log(err));
+      console.log('');
+    })
+    .catch(err => log(err));
 
 
 

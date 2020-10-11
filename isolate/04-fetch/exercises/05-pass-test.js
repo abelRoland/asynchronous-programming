@@ -5,7 +5,7 @@ const log = labeledLogger('5. Pass Test');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = '/isolate/04-fetch/fake-api/food/dry/grains.json';
+const path = '/isolate/fake-api/food/dry/grains.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 

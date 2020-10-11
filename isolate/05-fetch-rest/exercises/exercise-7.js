@@ -15,10 +15,18 @@ const parseResponse = (response) => {
 };
 
 const processData = (data) => {
-  log('data: ', data);
-  // write the rest ...
-
+  log('data: ', data); 
+  const filteredObj=[];
+  for (let i = 0; i < data.length; i++) {
+    let obj = {};
+    obj["id"]=data[i].id;
+    obj["name"]=data[i].name;
+    obj["username"]=data[i].username;
+    filteredObj.push(obj);
+  }
+  return filteredObj;
 };
+
 
 const testData = (actual) => {
   log('actual: ', actual);
@@ -30,7 +38,7 @@ const testData = (actual) => {
     const user = actual[i];
     it(`user ${i} has the correct keys`, () => {
       const userKeys = Object.keys(user);
-      expect(userKeys).to.have.members(['id', 'name', 'userName']);
+      expect(userKeys).to.have.members(['id', 'name', 'username']);
     });
   };
 };

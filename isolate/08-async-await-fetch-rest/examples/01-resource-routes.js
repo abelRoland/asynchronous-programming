@@ -14,7 +14,7 @@ const log = labeledLogger('1. Resource Routes');
 const fetchResourceType = async (resourceType) => {
   const url = 'https://jsonplaceholder.typicode.com/' + resourceType;
   log(url);
-
+ 
   const response = await fetch(url);
   if (!response.ok || response.status !== 200) {
     throw new Error('response was not ok');

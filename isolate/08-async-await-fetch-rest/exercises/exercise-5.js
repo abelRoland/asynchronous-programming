@@ -8,12 +8,18 @@ const expect = chai.expect;
 // hint: ctr-f "q" -> https://github.com/typicode/json-server
 
 const searchResources = async (resourceType = '', query = '') => {
+  const url = `https://jsonplaceholder.typicode.com/${resourceType}?q=${encodeURIComponent(query)}`;
 
+	const response = await fetch(url);
 
+	if (!response.ok || response.status !== 200) {
+		throw new Error('response is not okay');
+	}
 
+	const data = await response.json();
+
+	return data;
 };
-
-
 
 
 const test1 = (comment) => {

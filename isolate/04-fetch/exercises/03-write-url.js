@@ -5,7 +5,7 @@ const log = labeledLogger('3. Write URL');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = '/isolate/04-fetch/fake-api/animals/worms.json';
+const path = '/isolate/fake-api/animals/worms.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 
@@ -56,8 +56,8 @@ const separateAustralianTypes = (worms) => {
 
 fetch(requestURL)
   .then(parseResponse)
-  .then(testWormsTypes)
   .then(separateAustralianTypes)
+  .then(testWormsTypes)
   .catch(handleRejection);
 
 log('end of synchronous tasks');

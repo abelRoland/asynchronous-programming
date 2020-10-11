@@ -8,10 +8,18 @@ const expect = chai.expect;
 
 
 const todosByStatus = async (status = 'done') => {
+  const isDone = status === 'done' ? true : false;
+	const url = `https://jsonplaceholder.typicode.com/todos?completed=${isDone}`;
 
+	const response = await fetch(url);
 
+	if (!response.ok || response.status !== 200) {
+		throw new Error('response is not okay');
+	}
 
+	const data = await response.json();
 
+	return data;
 };
 
 

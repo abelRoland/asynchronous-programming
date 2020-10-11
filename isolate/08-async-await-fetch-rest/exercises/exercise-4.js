@@ -8,13 +8,21 @@ const expect = chai.expect;
 // hint: ctr-f "filter" -> https://github.com/typicode/json-server
 
 const usersByLocation = async (field = '', value = '') => {
+  const findAddress = decodeURI(`${field}=${value}`);
 
+	const url = `https://jsonplaceholder.typicode.com/users?address.${findAddress}`;
 
+	const response = await fetch(url);
+
+	if (!response.ok || response.status !== 200) {
+		throw new Error('response is not okay');
+	}
+
+	const data = await response.json();
+
+	return data[0];
 
 };
-
-
-
 
 const test1 = (user) => {
   log('user:', user);

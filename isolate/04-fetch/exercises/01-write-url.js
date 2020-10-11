@@ -4,7 +4,7 @@ const log = labeledLogger('1. Write URL');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = '/isolate/04-fetch/fake-api/json-types.json';
+const path = '/isolate/fake-api/json-types.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 

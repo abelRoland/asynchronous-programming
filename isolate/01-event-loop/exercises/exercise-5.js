@@ -33,9 +33,9 @@ const expected1 = ['!', '!', 'ÿ', 'ÿ', 'ÿ'];
 sortArray(toSort1, actual1);
 testSortAsync(actual1, expected1, 'Test 1');
 
-const toSort2 = ['!', '', '!', '', '!'];
+const toSort2 = ['!', ' ', '!', ' ', '!'];
 const actual2 = [];
-const expected2 = ['', '', '!', '!', '!'];
+const expected2 = [' ', ' ', '!', '!', '!'];
 sortArray(toSort2, actual2);
 testSortAsync(actual2, expected2, 'Test 2');
 

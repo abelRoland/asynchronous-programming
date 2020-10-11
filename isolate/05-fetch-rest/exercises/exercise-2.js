@@ -5,7 +5,7 @@ const log = labeledLogger('Exercise 2');
 const expect = chai.expect;
 
 const origin = 'https://jsonplaceholder.typicode.com';
-const path = _;
+const path = '/photos/81';
 log('path: ', path);
 
 

@@ -8,7 +8,7 @@ const log = labeledLogger('Exercise 6');
 const expect = chai.expect;
 
 const origin = 'https://jsonplaceholder.typicode.com';
-const path = _;
+const path ='/posts?userId=8&_limit=10';
 log('path: ', path);
 
 

@@ -5,7 +5,7 @@ const log = labeledLogger('Exercise 3');
 const expect = chai.expect;
 
 const origin = 'https://jsonplaceholder.typicode.com';
-const path = _;
+const path = '/photos?albumId=9&_limit=10'; 
 log('path: ', path);
 
 
@@ -20,7 +20,7 @@ const testData = (actual) => {
     expect(actual.length).to.equal(10);
   });
   it('should all have userId 9', () => {
-    const allHaveUserId9 = actual.every(album => album.userId === 9);
+    const allHaveUserId9 = actual.every(album => album.albumId === 9);
     expect(allHaveUserId9).to.be.true;
   });
 };

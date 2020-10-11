@@ -5,6 +5,7 @@ const expect = chai.expect;
 
 // refactor this function to use async/await
 
+/*
 const dryFoodSearch = (type = '', query = '') => {
   const url = `${window.location.origin}/isolate/fake-api/food/dry/${type}.json`;
   log(url);
@@ -22,6 +23,29 @@ const dryFoodSearch = (type = '', query = '') => {
         .filter(food => food.includes(query));
       return filtered;
     });
+};
+*/
+
+const dryFoodSearch = async (type = '', query = '') => {
+  const url = `${window.location.origin}/isolate/fake-api/food/dry/${type}.json`;
+  log(url);
+
+  const response = await fetch(url)
+
+      if (!response.ok || response.status !== 200) {
+        throw new Error('response is not ok');
+      };
+
+      const parse = await response.json();
+    
+      const checkFood = (dryFood) => {
+      const filtered = dryFood
+        .filter(food => food.includes(query));
+      return filtered;
+    };
+
+    const checkError = await checkFood(parse);
+    return checkError;
 };
 
 

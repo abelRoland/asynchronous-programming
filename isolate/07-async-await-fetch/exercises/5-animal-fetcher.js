@@ -6,7 +6,33 @@ const expect = chai.expect;
 // write this function to pass the tests below
 
 const animalFetcher = async (animal = '', query = '') => {
+  const url = `${window.location.origin}/isolate/fake-api/animals/${animal}.json`;
 
+	const response = await fetch(url);
+
+	if (!response.ok || response.status !== 200) {
+		throw new Error('response was not ok');
+	}
+
+	const parseDate = await response.json();
+
+	const check = (obj) => {
+		const existIn = [];
+		for (const key in obj) {
+			obj[key].forEach((element) => {
+				if (element.includes(query)) {
+					existIn.push(key);
+				}
+			});
+		}
+
+		const removeDuplicates = [...new Set(existIn)];
+		return removeDuplicates;
+	};
+
+	const result = check(parseDate);
+
+	return result;
 };
 
 

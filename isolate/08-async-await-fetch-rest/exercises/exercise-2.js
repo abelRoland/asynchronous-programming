@@ -9,25 +9,19 @@ const expect = chai.expect;
 
 const limitedResource = async (resourceType = '', number = 0) => {
 
-  const titleParam = 'title=' + title;
-  const encodedTitleParam = _(titleParam);
-  const URL = _;
+  const URL = `https://jsonplaceholder.typicode.com/${resourceType}?_limit=${number}`;
   log(URL);
 
   const response = await fetch(URL);
-  if (_) {
-    _;
+  if (!response.ok || response.status !== 200) {
+    throw new Error('response was not ok');
   }
 
   const data = await response.json();
-  const firstMatchingEntry = data[0];
-  return firstMatchingEntry;
+  return data;
 
 
 };
-
-
-
 
 const test1 = (users) => {
   log('users:', users);

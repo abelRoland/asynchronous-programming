@@ -1,7 +1,23 @@
 'use strict';
 
 const closesParentParamter = (parentParam) => {
-  // write me!
+  if (parentParam.length === 1) {
+    return (ownParam) => {
+      let result = ownParam[0];
+      for (let i = 1; i < ownParam.length; i++) {
+        result += parentParam + ownParam[i];
+      } 
+      return result;   
+    }
+  } else {
+    return (ownParam) => {
+      let result = parentParam;
+      for (let i = 0; i < ownParam.length; i++) {
+        result += ownParam[i] + parentParam;
+      } 
+      return result;   
+    }
+  }
 };
 
 const closure1 = closesParentParamter("|");
@@ -14,16 +30,16 @@ const result2 = closure2("+(=)+");
 console.assert(result2 === "+~(~=~)~+", "assert 2");
 
 const result3 = closure1("abc");
-console.assert(result3 === _, "assert 3");
+console.assert(result3 === 'a|b|c', "assert 3");
 
 const result4 = closure2("xyz");
-console.assert(result4 === _, "assert 4");
+console.assert(result4 === 'x~y~z', "assert 4");
 
 
-const closure3 = closesParentParamter(_);
-const result5 = closure3(_);
+const closure3 = closesParentParamter('--');
+const result5 = closure3('01');
 console.assert(result5 === "--0--1--", "assert 5");
 
-const closure4 = closesParentParamter(_);
-const result6 = closure4(_);
+const closure4 = closesParentParamter('--');
+const result6 = closure4('10');
 console.assert(result6 === "--1--0--", "assert 6");

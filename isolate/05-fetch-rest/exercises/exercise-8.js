@@ -5,7 +5,7 @@ const log = labeledLogger('Exercise 8');
 const expect = chai.expect;
 
 const origin = 'https://jsonplaceholder.typicode.com';
-const path = _;
+const path = '/albums?userId=1&_limit=10';
 log('path: ', path);
 
 
@@ -16,9 +16,14 @@ const parseResponse = (response) => {
 
 const processData = (data) => {
   log('data: ', data);
-  // write the rest ...
-
-
+  const filteredObj=[];
+  for (let i = 0; i < data.length; i++) {
+    let obj = {};
+    obj["id"]=data[i].id;
+    obj["userId"]=data[i].userId;
+    filteredObj.push(obj);
+  }
+  return filteredObj;
 };
 
 const testData = (actual) => {

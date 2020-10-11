@@ -6,13 +6,12 @@ const log = labeledLogger('6. Pass Test');
 const expect = chai.expect;
 
 const origin = window.location.origin;
-const path = '/isolate/04-fetch/fake-api/json-types.json';
+const path = '/isolate/fake-api/json-types.json';
 const requestURL = origin + path;
 log("requestURL: ", requestURL);
 
 const sumNumbers = (data) => {
   return data['numbers'].reduce((acc, next) => acc + next) 
-  // write me!
 };
 
 const handleRejection = (err) => {

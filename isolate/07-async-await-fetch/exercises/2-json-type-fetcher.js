@@ -5,25 +5,30 @@ const expect = chai.expect;
 
 // refactor this fetching function to async/await
 
-const jsonTypeFetcher = (type = '') => {
+const jsonTypeFetcher = async (type = '') => {
   const url = window.location.origin + '/isolate/fake-api/json-types.json';
 
-  return fetch(url)
-    .then(response => {
+  const response = await fetch(url)
+
       if (!response.ok || response.status !== 200) {
         throw new Error('response is not ok');
       };
 
-      return response.json();
-    })
-    .then(jsonTypes => {
-      const selectedType = jsonTypes[type];
-      if (selectedType === undefined) {
-        throw new ReferenceError(`no type "${type}"`);
-      }
+      const parse = await response.json();
+  
+      
+      const check = (jsonTypes) => {
+        const selectedType = jsonTypes[type];
+        if (selectedType === undefined) {
+          throw new ReferenceError(`no type "${type}"`);
+        }
 
-      return selectedType;
-    });
+        return selectedType;
+        };
+
+      const checkUndefined = await check(parse);
+
+      return checkUndefined;
 };
 
 

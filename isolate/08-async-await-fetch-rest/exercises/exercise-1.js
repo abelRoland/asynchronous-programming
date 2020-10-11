@@ -8,13 +8,13 @@ const expect = chai.expect;
 
 const fetchPhotoWithTitle = async (title = '') => {
   const titleParam = 'title=' + title;
-  const encodedTitleParam = _(titleParam);
-  const URL = _;
+  const encodedTitleParam = encodeURI(titleParam);
+  const URL = `https://jsonplaceholder.typicode.com/photos?${encodedTitleParam}`;
   log(URL);
 
   const response = await fetch(URL);
-  if (_) {
-    _;
+  if (!response.ok || response.status !== 200) {
+    throw new Error('response was not ok');
   }
 
   const data = await response.json();

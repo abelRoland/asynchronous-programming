@@ -5,20 +5,18 @@ const expect = chai.expect;
 
 // refactor this fetching function to async/await
 
-const basicFetcher = (path = '') => {
-  const url = window.location.origin + '/isolate/fake-api' + path;
-  log(url);
+const basicFetcher = async (path = '') => {
+	const url = window.location.origin + '/isolate/fake-api' + path;
 
-  return fetch(url)
-    .then(response => {
-      if (!response.ok || response.status !== 200) {
-        throw new Error('response is not ok');
-      };
+	const response = await fetch(url);
 
-      return response.json();
-    });
+	if (!response.ok || response.status !== 200) {
+		throw new Error('response is not ok');
+	}
+	const parseDate = await response.json();
+
+	return parseDate;
 };
-
 
 // these tests all work!
 
