@@ -1,14 +1,18 @@
 import { Post } from './post.js';
 
+const fetchURL = async (id) => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts/' + id);
+
+  const parse = await response.json();
+    
+  const newPost = new Post(parse);
+    return newPost.populate();
+  }
+
 export const choosePostHandler = (event) => {
   const postId = event.target.form.postId.value;
 
-  fetch('https://jsonplaceholder.typicode.com/posts/' + postId)
-    .then(res => res.json())
-    .then(postData => {
-      const newAlbum = new Post(postData);
-      return newAlbum.populate();
-    })
+  fetchURL(postId)
     .then(postInstance => {
       console.log(postInstance);
       const view = postInstance.render();

@@ -13,16 +13,17 @@ export class User {
     Object.assign(this, albumData);
   }
 
-  populate() {
-    return fetch('https://jsonplaceholder.typicode.com/users/' + this.id + '/todos')
-      .then(res => res.json())
-      .then(todos => {
-        this.todos = todos
-          .map(todo => new Todo(todo));
-        this.populated = true;
-        return this;
-      })
-      .catch(err => console.error(err));
+  async populate() {
+    try {
+      const res = await fetch('https://jsonplaceholder.typicode.com/users/' + this.id + '/todos');
+      const todos = await res.json();
+      this.todos = todos
+        .map(todo => new Todo(todo));
+      this.populated = true;
+      return this;
+    } catch (err) {
+      return console.error(err);
+    }
   }
 
   render() {

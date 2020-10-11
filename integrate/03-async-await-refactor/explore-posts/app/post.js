@@ -13,16 +13,17 @@ export class Post {
     Object.assign(this, albumData);
   }
 
-  populate() {
-    return fetch('https://jsonplaceholder.typicode.com/posts/' + this.id + '/comments')
-      .then(res => res.json())
-      .then(comments => {
-        this.comments = comments
-          .map(comment => new Comment(comment));
-        this.populated = true;
-        return this;
-      })
-      .catch(err => console.error(err));
+  async populate() {
+    try {
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts/' + this.id + '/comments');
+      const comments = await res.json();
+      this.comments = comments
+        .map(comment => new Comment(comment));
+      this.populated = true;
+      return this;
+    } catch (err) {
+      return console.error(err);
+    }
   }
 
   render() {

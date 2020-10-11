@@ -12,17 +12,20 @@ export class Album {
     Object.assign(this, albumData);
   }
 
-  populate() {
-    return fetch('https://jsonplaceholder.typicode.com/albums/' + this.id + '/photos')
-      .then(res => res.json())
-      .then(photos => {
-        this.photos = photos
-          .map(photo => new Photo(photo));
-        this.populated = true;
-        return this;
-      })
-      .catch(err => console.error(err));
+  async populate() {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/albums/' + this.id + '/photos')
+      
+      const photos = await response.json();
+          this.photos = photos
+            .map(photo => new Photo(photo));
+          this.populated = true;
+          return this;
+    } catch (err) {
+      return console.error(err);
+    }
   }
+
 
   render() {
     const container = document.createElement('div');
